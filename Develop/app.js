@@ -15,72 +15,6 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 console.log("Please build your team.");
 
-const managerQues = [
-    {
-        type: "input",
-        message: "What is your manager's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your manager's id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your manager's email?",
-        name: "email"
-    },
-    {
-        type: "input",
-        message: "What is your manager's office number?",
-        name: "officeNumber"
-    }
-];
-const engineerQues = [
-    {
-        type: "input",
-        message: "What is your engineer's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your engineer's id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your engineer's email?",
-        name: "email"
-    },
-    {
-        type: "input",
-        message: "What is your engineer's Github username?",
-        name: "github"
-    }
-];
-const internQues = [
-    {
-        type: "input",
-        message: "What is your intern's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your intern's id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your intern's email?",
-        name: "email"
-    },
-    {
-        type: "input",
-        message: "What is your intern's school?",
-        name: "school"
-    }
-];
 const nextEmployee = [
     {
         type: "list",
@@ -93,7 +27,7 @@ const nextEmployee = [
 async function init() {
     try {
         // const employeesArr = [];
-        let currentObj = await inquirer.prompt(managerQues);
+        let currentObj = await inquirer.prompt(Manager.managerQues);
         let role = "Manager";
         const employeesArr = [{role, ...currentObj}];
         console.log(employeesArr);
@@ -101,11 +35,11 @@ async function init() {
         while(next.role !== "I don't want to add any more team members.") {
             switch (next.role) {
                 case "Engineer":
-                    currentObj = await inquirer.prompt(engineerQues);
+                    currentObj = await inquirer.prompt(Engineer.engineerQues);
                     role = "Engineer";
                     break;
                 case "Intern":
-                    currentObj = await inquirer.prompt(internQues);
+                    currentObj = await inquirer.prompt(Intern.internQues);
                     role = "Intern";
                     break;
             }
