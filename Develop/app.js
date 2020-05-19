@@ -14,8 +14,6 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-console.log("Please build your team.");
-
 const nextEmployee = [
     {
         type: "list",
@@ -94,48 +92,53 @@ const managerQues = [
 async function init() {
     try {
         let currentObj = await inquirer.prompt(managerQues);
-        const newManager = new Manager({...currentObj});
-        // const newManager = new Manager(currentObj.officeNumber, currentObj.name, currentObj.id, currentObj.email);
+        //Prompt Manager Info and push object to array
+        const newManager = new Manager(currentObj.name, currentObj.id, currentObj.email, currentObj.officeNumber);
         const managerObj = {name:newManager.getName(), id:newManager.getId(), email:newManager.getEmail(), role: newManager.getRole(), officeNumber:newManager.getOfficeNumber()};
         const employeesArr = [{...managerObj}];
-        console.log(employeesArr);
+        //Prompt what employee to add next
         let next = await inquirer.prompt(nextEmployee);
         while(next.role !== "I don't want to add any more team members.") {
             switch (next.role) {
+                //Prompt Engineer Info and push object to array
                 case "Engineer":
                     currentObj = await inquirer.prompt(engineerQues);
-                    let newEngineer = new Engineer({...currentObj});
+                    let newEngineer = new Engineer(currentObj.name, currentObj.id, currentObj.email, currentObj.github);
                     let engineerObj = {name:newEngineer.getName(), id:newEngineer.getId(), email:newEngineer.getEmail(), role: newEngineer.getRole(), github:newEngineer.getGithub()};
                     employeesArr.push({...engineerObj});
                     break;
+                //Prompt Intern Info and push object to array
                 case "Intern":
                     currentObj = await inquirer.prompt(internQues);
-                    let newIntern = new Intern({...currentObj});
+                    let newIntern = new Intern(currentObj.name, currentObj.id, currentObj.email, currentObj.school);
                     let internObj = {name:newIntern.getName(), id:newIntern.getId(), email:newIntern.getEmail(), role: newIntern.getRole(), school:newIntern.getSchool()};
                     employeesArr.push({...internObj});
                     break;
             }
+            //While user still wants to add employees, prompt what employee to add next
+            console.log(employeesArr);
             next = await inquirer.prompt(nextEmployee);
         }
+        //Render html data and write to team.html file
+        // const html = await render(employeesArr);
+        // fs.writeFile(outputPath, html);
     } catch(err) {
         console.log(err);
     }
 }
 
+console.log("Please build your team.");
 init();
-// const html = render(employeesArr);
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
-
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
