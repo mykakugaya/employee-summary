@@ -2,32 +2,40 @@
 const Employee = require("./Employee");
 
 class Intern extends Employee {
-    constructor(school) {
-        this.school = school;
+    constructor(obj) {
+        this.school = obj.school;
+        super("Intern", obj.name, obj.id, obj.email);
+    }
+    getSchool() {
+        return this.school;
+    }
+    getRole() {
+        return "Intern";
     }
 }
 
-const internQues = [
-    {
-        type: "input",
-        message: "What is your intern's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your intern's id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your intern's email?",
-        name: "email"
-    },
-    {
-        type: "input",
-        message: "What is your intern's school?",
-        name: "school"
-    }
-];
+module.exports = Intern;
 
-module.exports = {Intern, internQues};
+// const internQues = [
+//     {
+//         type: "input",
+//         message: "What is your intern's name?",
+//         name: "name"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your intern's id?",
+//         name: "id"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your intern's email?",
+//         name: "email"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your intern's school?",
+//         name: "school"
+//     }
+// ];
+// module.exports = {Intern, internQues};

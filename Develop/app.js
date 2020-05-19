@@ -6,6 +6,7 @@ const path = require("path");
 const fs = require("fs");
 const util = require("util");
 
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
@@ -23,27 +24,97 @@ const nextEmployee = [
         choices: ["Engineer", "Intern", "I don't want to add any more team members."]
     }
 ];
+const engineerQues = [
+    {
+        type: "input",
+        message: "What is your engineer's name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is your engineer's id?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is your engineer's email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is your engineer's Github username?",
+        name: "github"
+    }
+];
+const internQues = [
+    {
+        type: "input",
+        message: "What is your intern's name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is your intern's id?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is your intern's email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is your intern's school?",
+        name: "school"
+    }
+];
+const managerQues = [
+    {
+        type: "input",
+        message: "What is your manager's name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is your manager's id?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is your manager's email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is your manager's office number?",
+        name: "officeNumber"
+    }
+];
 
 async function init() {
     try {
-        // const employeesArr = [];
-        let currentObj = await inquirer.prompt(Manager.managerQues);
-        let role = "Manager";
-        const employeesArr = [{role, ...currentObj}];
+        let currentObj = await inquirer.prompt(managerQues);
+        const newManager = new Manager({...currentObj});
+        // const newManager = new Manager(currentObj.officeNumber, currentObj.name, currentObj.id, currentObj.email);
+        const managerObj = {name:newManager.getName(), id:newManager.getId(), email:newManager.getEmail(), role: newManager.getRole(), officeNumber:newManager.getOfficeNumber()};
+        const employeesArr = [{...managerObj}];
         console.log(employeesArr);
         let next = await inquirer.prompt(nextEmployee);
         while(next.role !== "I don't want to add any more team members.") {
             switch (next.role) {
                 case "Engineer":
-                    currentObj = await inquirer.prompt(Engineer.engineerQues);
-                    role = "Engineer";
+                    currentObj = await inquirer.prompt(engineerQues);
+                    let newEngineer = new Engineer({...currentObj});
+                    let engineerObj = {name:newEngineer.getName(), id:newEngineer.getId(), email:newEngineer.getEmail(), role: newEngineer.getRole(), github:newEngineer.getGithub()};
+                    employeesArr.push({...engineerObj});
                     break;
                 case "Intern":
-                    currentObj = await inquirer.prompt(Intern.internQues);
-                    role = "Intern";
+                    currentObj = await inquirer.prompt(internQues);
+                    let newIntern = new Intern({...currentObj});
+                    let internObj = {name:newIntern.getName(), id:newIntern.getId(), email:newIntern.getEmail(), role: newIntern.getRole(), school:newIntern.getSchool()};
+                    employeesArr.push({...internObj});
                     break;
             }
-            employeesArr.push({role, ...currentObj});
             next = await inquirer.prompt(nextEmployee);
         }
     } catch(err) {

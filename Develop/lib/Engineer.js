@@ -2,32 +2,40 @@
 const Employee = require("./Employee");
 
 class Engineer extends Employee {
-    constructor(github) {
-        this.github = github;
+    constructor(obj) {
+        this.github = obj.github;
+        super("Engineer", obj.name, obj.id, obj.email);
+    }
+    getGithub() {
+        return this.github;
+    }
+    getRole() {
+        return "Engineer";
     }
 }
 
-const engineerQues = [
-    {
-        type: "input",
-        message: "What is your engineer's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your engineer's id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your engineer's email?",
-        name: "email"
-    },
-    {
-        type: "input",
-        message: "What is your engineer's Github username?",
-        name: "github"
-    }
-];
+module.exports = Engineer;
 
-module.exports = {Engineer, engineerQues};
+// const engineerQues = [
+//     {
+//         type: "input",
+//         message: "What is your engineer's name?",
+//         name: "name"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your engineer's id?",
+//         name: "id"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your engineer's email?",
+//         name: "email"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your engineer's Github username?",
+//         name: "github"
+//     }
+// ];
+// module.exports = {Engineer, engineerQues};

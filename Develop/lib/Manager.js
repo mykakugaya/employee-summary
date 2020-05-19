@@ -2,32 +2,40 @@
 const Employee = require("./Employee");
 
 class Manager extends Employee {
-    constructor(officeNumber) {
-        this.officeNumber = officeNumber;
+    constructor(obj) {
+        this.officeNumber = obj.officeNumber;
+        super(obj.name, obj.id, obj.email);
+    }
+    getOfficeNumber() {
+        return this.officeNumber;
+    }
+    getRole() {
+        return "Manager";
     }
 }
 
-const managerQues = [
-    {
-        type: "input",
-        message: "What is your manager's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your manager's id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your manager's email?",
-        name: "email"
-    },
-    {
-        type: "input",
-        message: "What is your manager's office number?",
-        name: "officeNumber"
-    }
-];
+module.exports = Manager;
 
-module.exports = {Manager, managerQues};
+// const managerQues = [
+//     {
+//         type: "input",
+//         message: "What is your manager's name?",
+//         name: "name"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your manager's id?",
+//         name: "id"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your manager's email?",
+//         name: "email"
+//     },
+//     {
+//         type: "input",
+//         message: "What is your manager's office number?",
+//         name: "officeNumber"
+//     }
+// ];
+// module.exports = {Manager, managerQues};
