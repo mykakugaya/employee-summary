@@ -15,27 +15,3 @@ class Engineer extends Employee {
 }
 
 module.exports = Engineer;
-
-// const engineerQues = [
-//     {
-//         type: "input",
-//         message: "What is your engineer's name?",
-//         name: "name"
-//     },
-//     {
-//         type: "input",
-//         message: "What is your engineer's id?",
-//         name: "id"
-//     },
-//     {
-//         type: "input",
-//         message: "What is your engineer's email?",
-//         name: "email"
-//     },
-//     {
-//         type: "input",
-//         message: "What is your engineer's Github username?",
-//         name: "github"
-//     }
-// ];
-// module.exports = {Engineer, engineerQues};

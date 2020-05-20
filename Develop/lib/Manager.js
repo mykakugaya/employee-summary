@@ -15,27 +15,3 @@ class Manager extends Employee {
 }
 
 module.exports = Manager;
-
-// const managerQues = [
-//     {
-//         type: "input",
-//         message: "What is your manager's name?",
-//         name: "name"
-//     },
-//     {
-//         type: "input",
-//         message: "What is your manager's id?",
-//         name: "id"
-//     },
-//     {
-//         type: "input",
-//         message: "What is your manager's email?",
-//         name: "email"
-//     },
-//     {
-//         type: "input",
-//         message: "What is your manager's office number?",
-//         name: "officeNumber"
-//     }
-// ];
-// module.exports = {Manager, managerQues};
